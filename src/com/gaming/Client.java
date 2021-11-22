@@ -8,7 +8,7 @@ public class Client {
     private int post;
     private String start;
     private int duration;
-    private String gameName;
+    private Main.Games gameName;
     private int amount;
 
 
@@ -55,18 +55,23 @@ public class Client {
         System.out.print("7." + Main.Games.MARIO.label + "\n");
 
         int game = scanner.nextInt();
-
         switch (game){
 
-            case 1: gameName = Main.Games.PES.label; break;
-            case 2: gameName = Main.Games.FIFA.label; break;
-            case 3: gameName = Main.Games.COD.label; break;
-            case 4: gameName = Main.Games.GOW.label; break;
-            case 5: gameName = Main.Games.FORZA.label; break;
-            case 6: gameName = Main.Games.RDR.label; break;
-            case 7: gameName = Main.Games.MARIO.label; break;
+            case 1: gameName = Main.Games.PES; break;
+            case 2: gameName = Main.Games.FIFA; break;
+            case 3: gameName = Main.Games.COD; break;
+            case 4: gameName = Main.Games.GOW; break;
+            case 5: gameName = Main.Games.FORZA; break;
+            case 6: gameName = Main.Games.RDR; break;
+            case 7: gameName = Main.Games.MARIO; break;
 
         };
+
+        do {
+            if (!spot.isSpotAvailable(users,gameName)) {
+
+            }
+        }while(!spot.isSpotAvailable(users,gameName));
 
         // Consume newline left-over
         scanner.nextLine();

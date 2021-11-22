@@ -16,4 +16,17 @@ public class Post {
         }
         return isAvailable;
     }
+
+    public Boolean isSpotAvailable(List users, Main.Games game) {
+        System.out.println("Checking if spot is available");
+        System.out.println("Users: " + users);
+        System.out.println("Game: " + game);
+
+        Boolean isAvailable = true;
+        for (Object user : users) {
+            HashMap userSpot = (HashMap) user;
+
+        }
+        return isAvailable;
+    }
 }
