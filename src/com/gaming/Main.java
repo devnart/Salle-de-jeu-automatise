@@ -3,8 +3,30 @@ package com.gaming;
 import java.util.Scanner;
 
 public class Main {
+public enum Games {
+    PES("Pro Evolution Soccer",1,2),
+    FIFA("FIFA",2,1),
+    COD("Call of Duty",3,4),
+    GOW("God of War",4,3),
+    FORZA("Forza Horizon",5,6),
+    RDR("Read Dead Redemption",6,5),
+    MARIO("Super Mario",7,3);
 
+    public final String label;
+    public final int postN1;
+    public final int postN2;
+
+    Games(String label, int postN1,int postN2) {
+        this.label = label;
+        this.postN1 = postN1;
+        this.postN2 = postN2;
+    }
+}
     public static void main(String[] args) {
+
+
+        // System.out.println("id : " + Games.PES.postN2);
+
         Scanner scanner = new Scanner(System.in);	//Scanner declaration
         Client client = new Client();
         Revenue revenue = new Revenue();

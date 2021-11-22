@@ -18,10 +18,10 @@ public class Client {
     public void addClient(){
 
 
-        if(users.size() < 1){
+        if(users.size() < 7){
             newClient();
 
-        } else if (users.size() < 3){
+        } else if (users.size() < 17){
             System.out.print("No more post available new client will wait in the lobby \n");
             newClient();
             System.out.print("You are number " +  number + " in the queue \n");
@@ -44,8 +44,29 @@ public class Client {
         System.out.print("Name : \n");
         name = scanner.nextLine();
 
-        System.out.print("post : \n");
-        post = scanner.nextInt();
+        System.out.print("Game Name : \n");
+
+        System.out.print("1." + Main.Games.PES.label + "\n");
+        System.out.print("2." + Main.Games.FIFA.label + "\n");
+        System.out.print("3." + Main.Games.COD.label + "\n");
+        System.out.print("4." + Main.Games.GOW.label + "\n");
+        System.out.print("5." + Main.Games.FORZA.label + "\n");
+        System.out.print("6." + Main.Games.RDR.label + "\n");
+        System.out.print("7." + Main.Games.MARIO.label + "\n");
+
+        int game = scanner.nextInt();
+
+        switch (game){
+
+            case 1: gameName = Main.Games.PES.label; break;
+            case 2: gameName = Main.Games.FIFA.label; break;
+            case 3: gameName = Main.Games.COD.label; break;
+            case 4: gameName = Main.Games.GOW.label; break;
+            case 5: gameName = Main.Games.FORZA.label; break;
+            case 6: gameName = Main.Games.RDR.label; break;
+            case 7: gameName = Main.Games.MARIO.label; break;
+
+        };
 
         // Consume newline left-over
         scanner.nextLine();
@@ -64,9 +85,6 @@ public class Client {
         duration = scanner.nextInt();
 
         scanner.nextLine();
-
-        System.out.print("gameName : \n");
-        gameName = scanner.nextLine();
 
 
         switch (duration) {
@@ -90,7 +108,7 @@ public class Client {
 
     }
 
-    public void show(){
+    public void show() {
         System.out.print("clients : \n" + users + "\n");
     }
 
