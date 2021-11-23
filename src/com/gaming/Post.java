@@ -17,16 +17,32 @@ public class Post {
         return isAvailable;
     }
 
-    public Boolean isSpotAvailable(List users, Main.Games game) {
-        System.out.println("Checking if spot is available");
-        System.out.println("Users: " + users);
-        System.out.println("Game: " + game);
-
-        Boolean isAvailable = true;
+    public int isSpotAvailable(List users, Main.Games game) {
+        // if no user is available
+        int post = game.postN1;
+        System.out.println("Game before loop : " + game);
         for (Object user : users) {
-            HashMap userSpot = (HashMap) user;
-
+            HashMap userGame = (HashMap) user;
+            System.out.println("Game inside : " + game);
+            if (userGame.get("post").equals(game.postN1) && !userGame.get("post").equals(game.postN2)) {
+                System.out.println("postN2 - 0");
+                post = game.postN2;
+                break;
+            } else if (userGame.get("post").equals(game.postN2) && !userGame.get("post").equals(game.postN1)) {
+                System.out.println("postN1 - 1");
+                post = game.postN1;
+                break;
+            } else if (!userGame.get("post").equals(game.postN1) && !userGame.get("post").equals(game.postN2)) {
+                System.out.println("postN1 - 2");
+                post = game.postN1;
+            }
+            else {
+                System.out.println("No post");
+                post = 0;
+            }
         }
-        return isAvailable;
+        return post;
     }
+
+
 }

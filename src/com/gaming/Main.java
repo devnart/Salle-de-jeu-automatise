@@ -1,5 +1,6 @@
 package com.gaming;
 
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class Main {
@@ -25,8 +26,13 @@ public class Main {
     }
     public static void main(String[] args) {
 
+        // get current time
+        LocalTime time = LocalTime.now();
+        // System.out.println("Current time is: " + time );
+        // time plus 30 minutes
+        // timePlus30 = time.plusMinutes(60);
 
-        // System.out.println("id : " + Games.PES.postN2);
+
 
         Scanner scanner = new Scanner(System.in);	//Scanner declaration
         Client client = new Client();

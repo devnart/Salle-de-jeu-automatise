@@ -1,12 +1,14 @@
 package com.gaming;
 
+import java.time.LocalTime;
 import java.util.*;
 
 public class Client {
 
     private String name;
     private int post;
-    private String start;
+    private LocalTime start;
+    private LocalTime end;
     private int duration;
     private Main.Games gameName;
     private int amount;
@@ -14,6 +16,9 @@ public class Client {
 
     List <HashMap> users= new ArrayList();
     int number = 1;
+
+    // time instance
+    LocalTime time = LocalTime.now();
 
     public void addClient(){
 
@@ -57,7 +62,7 @@ public class Client {
         int game = scanner.nextInt();
         switch (game){
 
-            case 1: gameName = Main.Games.PES; break;
+            case 1: gameName = Main.Games.PES;  break;
             case 2: gameName = Main.Games.FIFA; break;
             case 3: gameName = Main.Games.COD; break;
             case 4: gameName = Main.Games.GOW; break;
@@ -67,30 +72,17 @@ public class Client {
 
         };
 
-        do {
-            if (!spot.isSpotAvailable(users,gameName)) {
-
-            }
-        }while(!spot.isSpotAvailable(users,gameName));
-
         // Consume newline left-over
         scanner.nextLine();
-
-        do {
-            System.out.print("start : \n");
-            start = scanner.nextLine();
-
-            if (!spot.isAvailable(start,users)) {
-                System.out.println("Spot is reserved choose another time");
-            }
-        }while (!spot.isAvailable(start,users));
-
-
+        post = spot.isSpotAvailable(users, gameName);
+        System.out.println("post : " + post);
+        start = time;
         System.out.print("duration : \n");
         duration = scanner.nextInt();
 
         scanner.nextLine();
 
+        end = start.plusMinutes(duration);
 
         switch (duration) {
             case 30 : amount = 5; break;
@@ -103,6 +95,7 @@ public class Client {
         client.put("name",name);
         client.put("post",post);
         client.put("start",start);
+        client.put("end",end);
         client.put("duration",duration);
         client.put("gameName",gameName);
         client.put("ref",ref);
