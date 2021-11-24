@@ -15,7 +15,10 @@ public class Client {
 
 
     List <HashMap> users= new ArrayList();
+    List <HashMap> lobby = new LinkedList<>();
+
     int number = 1;
+    boolean toLobby = false;
 
     // time instance
     LocalTime time = LocalTime.now();
@@ -25,7 +28,6 @@ public class Client {
 
         if(users.size() < 7){
             newClient();
-
         } else if (users.size() < 17){
             System.out.print("No more post available new client will wait in the lobby \n");
             newClient();
@@ -69,27 +71,63 @@ public class Client {
             case 5: gameName = Main.Games.FORZA; break;
             case 6: gameName = Main.Games.RDR; break;
             case 7: gameName = Main.Games.MARIO; break;
-
         };
 
-        // Consume newline left-over
+        int a=0;
+        int b=0;
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).get("post").equals(gameName.postN1)) {
+                a=1;
+            } else{
+                a=0;
+            }
+            if (users.get(i).get("post").equals(gameName.postN2)) {
+               b = 1;
+            } else {
+                 b = 0;
+            }
+        }
+        if(a==0 && b==0){
+            post=gameName.postN1;
+
+        }else if(a!=0 && b==0){
+            post=gameName.postN2;
+        }
+        else {
+            System.out.println("No more post you will be in Lobby");
+            toLobby=true;
+        }
+
         scanner.nextLine();
-        post = spot.isSpotAvailable(users, gameName);
-        System.out.println("post : " + post);
         start = time;
+        if (toLobby) {
+            start = spot.isAvailable(start,users,gameName);
+        }
+        spot.isAvailable(start,users,gameName);
+
         System.out.print("duration : \n");
+
+        System.out.print("30 Minutes \n");
+        System.out.print("1 Hour \n");
+        System.out.print("2 Hours \n");
+        System.out.print("5 Hours \n");
+        System.out.print("9 Hours \n");
+
+        System.out.print("Choose a duration : ");
+
         duration = scanner.nextInt();
+
 
         scanner.nextLine();
 
         end = start.plusMinutes(duration);
 
         switch (duration) {
-            case 30 : amount = 5; break;
-            case 1 : amount = 10; break;
-            case 2 : amount = 18; break;
-            case 5 : amount = 40; break;
-            case 9 : amount = 65; break;
+            case 30 : amount = 5; end= start.plusMinutes(30); break;
+            case 1 : amount = 10; end=start.plusMinutes(60); break;
+            case 2 : amount = 18; end=start.plusMinutes(120); break;
+            case 5 : amount = 40; end=start.plusMinutes(300); break;
+            case 9 : amount = 65; end=start.plusMinutes(540); break;
         }
 
         client.put("name",name);
@@ -101,13 +139,25 @@ public class Client {
         client.put("ref",ref);
         client.put("amount",amount);
 
+        System.out.println("post : " + post);
+        System.out.println("start : " + start);
+        System.out.println("end : " + end);
+
         users.add(client);
 
+        if (toLobby) {
+            System.out.println("You are in the lobby");
+            lobby.add(client);
+        }
 
     }
 
-    public void show() {
+    public void showClients() {
         System.out.print("clients : \n" + users + "\n");
+    }
+
+    public void showLobby() {
+        System.out.print("lobby : \n" + lobby + "\n");
     }
 
     public int getTotalAmount() {

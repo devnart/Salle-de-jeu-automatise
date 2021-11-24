@@ -17,11 +17,14 @@ public class Main {
         public final String label;
         public final int postN1;
         public final int postN2;
+        public final boolean reserved;
 
         Games(String label, int postN1,int postN2) {
             this.label = label;
             this.postN1 = postN1;
             this.postN2 = postN2;
+            this.reserved = false;
+
         }
     }
     public static void main(String[] args) {
@@ -44,15 +47,17 @@ public class Main {
         do {
             System.out.print("1. Add client \n");
             System.out.print("2. Clients \n");
-            System.out.print("3. total revenue \n");
+            System.out.print("3. Lobby \n");
+            System.out.print("4. Revenue \n");
             System.out.print("0. Exit \n");
 
             choice =  scanner.nextInt();
 
             switch (choice) {
                 case 1 : client.addClient(); break;
-                case 2 : client.show(); break;
-                case 3 : System.out.print("total revenue is : " + client.getTotalAmount() + "\n" ); break;
+                case 2 : client.showClients(); break;
+                case 3 : client.showLobby(); break;
+                case 4 : System.out.print("total revenue is : " + client.getTotalAmount() + "\n" ); break;
 
             }
         }while (choice != 0);
