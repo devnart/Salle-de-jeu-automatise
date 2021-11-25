@@ -1,6 +1,7 @@
 package com.gaming;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Client {
@@ -41,7 +42,6 @@ public class Client {
     public void newClient(){
         HashMap client = new HashMap();
         Post spot = new Post();
-
 
         Random rand = new Random();
         int upperbound = 10000;
@@ -94,7 +94,6 @@ public class Client {
             post=gameName.postN2;
         }
         else {
-            System.out.println("No more post you will be in Lobby");
             toLobby=true;
         }
 
@@ -103,8 +102,6 @@ public class Client {
         if (toLobby) {
             start = spot.isAvailable(start,users,gameName);
         }
-        spot.isAvailable(start,users,gameName);
-
         System.out.print("duration : \n");
 
         System.out.print("30 Minutes \n");
@@ -129,7 +126,11 @@ public class Client {
             case 5 : amount = 40; end=start.plusMinutes(300); break;
             case 9 : amount = 65; end=start.plusMinutes(540); break;
         }
-
+        spot.getMaxEndTime(users);
+        if (end.isAfter(LocalTime.parse("18:00:00")) || end.isBefore(LocalTime.parse("09:00:00"))) {
+            System.out.println("You can't play after 18:00 you can come back tomorrow or play till 18:00");
+            end = LocalTime.parse("18:00:00");
+        }
         client.put("name",name);
         client.put("post",post);
         client.put("start",start);
